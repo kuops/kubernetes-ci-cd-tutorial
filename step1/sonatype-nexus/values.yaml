@@ -10,7 +10,7 @@ deploymentStrategy: {}
 
 nexus:
   imageName: kuopsquay/travelaudience.docker-nexus
-  imageTag: 3.13.0_alpine_3.8.1
+  imageTag: 3.14.0
   imagePullPolicy: IfNotPresent
   env:
     - name: install4jAddVmParams
