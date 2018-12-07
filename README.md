@@ -15,16 +15,13 @@
 准备 `nexus` 和 `jenkins`
 
 ```
-helm install --upgrade nexus
-helm install --upgrade jenkins
+helm upgrade --install myjenkins step1/jenkins/
+helm upgrade --install mynexus step1/sonatype-nexus/
 ```
 
 ### step 2 
 
-- php
-- java
-- python
-- go
-- nodejs
+- PHP demo 使用 https://github.com/kuops/php-example-app.git
+
 
 
