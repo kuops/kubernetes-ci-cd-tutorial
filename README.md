@@ -39,7 +39,9 @@ kubectl create secret docker-registry regcred --docker-server=docker.k8s.kuops.c
 kubectl  apply  -f step2/php/composer/pvc.yaml
 ```
 
-使用 Jenkins 创建  php-example-app-ci Job，用来打包镜像，并上传至 nexus 
+使用 Jenkins 创建  php-example-app-ci Job，用来打包镜像，并上传至 nexus
+
+> job 使用 branchname + buildnumber 作为镜像的 tag
 
 ![php-pipeline-ci](image/PHP-CI-Pipeline-Setting.png)
 
