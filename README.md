@@ -52,7 +52,7 @@ kubectl  apply  -f step2/php/composer/pvc.yaml
 部署完毕, 访问 voyager :
 
 ```
-curl http://laravel.k8s.kuops.com
+curl http://laravel.k8s.kuops.com/admin
 ```
 
 
