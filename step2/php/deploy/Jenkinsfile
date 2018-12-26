@@ -62,7 +62,7 @@ spec:
                     sh """
                     pwd
                     helm  upgrade mysql-dev step2/mysql/ --install --namespace=dev --wait
-                    helm  upgrade php-app step2/php/deploy/Charts --install --namespace=dev
+                    helm  upgrade php-app step2/php/deploy/Charts --install --namespace=dev --wait
                     """
                 }
             }
