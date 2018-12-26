@@ -1,0 +1,35 @@
+# Default values for mysql.
+replicaCount: 1
+
+image:
+  repository: mysql
+  tag: 8.0
+  pullPolicy: IfNotPresent
+  envVars:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "123456"
+    - name: MYSQL_DATABASE
+      value: "voyager"
+    - name: MYSQL_USER
+      value: "mysql"
+    - name: MYSQL_PASSWORD
+      value: "mysql"
+  volumeMounts:
+    - name: data
+      mountPath: /var/lib/mysql
+    - name: mysql-auth-conf
+      mountPath: /etc/mysql/conf.d/auth.cnf
+      subPath: auth.cnf
+
+storage:
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+configmap:
+  name: mysql-conf
+
+service:
+  type: ClusterIP
+  port: 3306
+  clusterIP: None
+

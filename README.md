@@ -19,9 +19,30 @@ helm upgrade --install myjenkins step1/jenkins/
 helm upgrade --install mynexus step1/sonatype-nexus/
 ```
 
-### step 2 
+配置 nexus 仓库，添加 docker(hosted) 仓库
 
-- PHP demo 使用 https://github.com/kuops/php-example-app.git
+https://github.com/travelaudience/kubernetes-nexus/blob/master/docs/admin/configuring-nexus.md
+
+创建 Private Registry Secret
+
+```
+kubectl create secret docker-registry regcred --docker-server=docker.k8s.kuops.com --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+```
+
+### step 2
+
+- PHP demo 使用 `https://github.com/kuops/php-example-app.git`
+
+创建 composer 缓存 pvc
+
+```
+kubectl  apply  -f step2/php/composer/pvc.yaml
+```
+
+使用 Jenkins 创建  php-example-app-ci Job，用来打包镜像，并上传至 nexus
+
+![php-pipeline-ci](image/PHP-Pipeline-Setting.png)
+
 
 
 

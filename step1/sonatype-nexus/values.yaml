@@ -130,7 +130,11 @@ nexusBackup:
 ingress:
   enabled: true
   path: /
-  annotations: {}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+  # annotations: {}
   # # NOTE: Can't use 'false' due to https://github.com/jetstack/kube-lego/issues/173.
   # kubernetes.io/ingress.allow-http: true
   # kubernetes.io/ingress.class: gce

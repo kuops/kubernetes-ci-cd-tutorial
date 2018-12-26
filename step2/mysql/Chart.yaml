@@ -1,0 +1,17 @@
+name: mysql
+version: 0.1.0
+appVersion: 8.0
+description: mysql database 8.0 version
+keywords:
+- mysql
+- database
+- sql
+home: https://www.mysql.com/
+icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+sources:
+- https://github.com/kubernetes/charts
+- https://github.com/docker-library/mysql
+maintainers:
+- name: kuops
+  email: opshsy@gmail.com
+engine: gotpl
