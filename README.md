@@ -39,7 +39,20 @@ kubectl create secret docker-registry regcred --docker-server=docker.k8s.kuops.c
 kubectl  apply  -f step2/php/composer/pvc.yaml
 ```
 
-使用 Jenkins 创建  php-example-app-ci Job，用来打包镜像，并上传至 nexus
+使用 Jenkins 创建  php-example-app-ci Job，用来打包镜像，并上传至 nexus 
 
-![php-pipeline-ci](image/PHP-Pipeline-Setting.png)
+![php-pipeline-ci](image/PHP-CI-Pipeline-Setting.png)
+
+
+使用 Jenkins 创建  php-example-app-cd Job，用来部署 lavael app 
+
+![php-pipeline-cd](image/PHP-CD-Pipeline-Setting.png)
+
+
+部署完毕, 访问 voyager :
+
+```
+curl http://laravel.k8s.kuops.com
+```
+
 
