@@ -49,10 +49,12 @@ kubectl  apply  -f step2/php/composer/pvc.yaml
 ![php-pipeline-cd](image/PHP-CD-Pipeline-Setting.png)
 
 
-部署完毕, 访问 voyager :
+部署完毕, 访问 voyager:
 
 ```
 curl http://laravel.k8s.kuops.com/admin
 ```
+
+用户名: `admin@admin.com` , 密码: `password`
 
 
