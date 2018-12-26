@@ -43,6 +43,3 @@ kubectl  apply  -f step2/php/composer/pvc.yaml
 
 ![php-pipeline-ci](image/PHP-Pipeline-Setting.png)
 
-
-
-

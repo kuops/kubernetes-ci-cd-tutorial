@@ -1,0 +1,32 @@
+# Default values for php-example-app.
+
+replicaCount: 1
+
+image:
+  repository: docker.k8s.kuops.com/php-example-app
+  tag: master-1
+  pullPolicy: IfNotPresent
+  pullSecret: regcred
+
+configmap:
+  name: app-conf
+  app_url: laravel.k8s.kuops.com
+  db_host: mysql-dev
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  path: /
+  host: laravel.k8s.kuops.com
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+

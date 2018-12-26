@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: php-example-cm
+  name: {{ .Values.configmap.name }}
 data:
   default.conf: |
     server {
@@ -42,14 +42,14 @@ data:
   .env: |
     APP_NAME=Laravel
     APP_ENV=local
-    APP_KEY=base64:dUY4bUhySGhLTnpobGpmRkZxZ2hWSzNtb2I5ZUNiSVU=
+    APP_KEY=base64:{{ randAlphaNum 32 | b64enc }}
     APP_DEBUG=true
-    APP_URL=http://10.0.7.100:30448
+    APP_URL=http://{{ .Values.configmap.app_url }}
     
     LOG_CHANNEL=stack
     
     DB_CONNECTION=mysql
-    DB_HOST=mysql.default.svc.cluster.local
+    DB_HOST={{ .Values.configmap.db_host }}
     DB_PORT=3306
     DB_DATABASE=voyager
     DB_USERNAME=mysql
