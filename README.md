@@ -87,6 +87,8 @@ helm upgrade --install my-jenkins jenkins
 
 ## 部署程序
 
-- [使用 helm chart 部署 laravel(php) 程序](PHP.md)
+- [使用 Jenkins 和 helm chart 部署 laravel(php) 程序](PHP.md)
+
+- [使用 helm 部署 flask(python) 程序，并使用 Prometheus 获取指标](Python.md)
 
 
