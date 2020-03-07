@@ -22,6 +22,8 @@ cd kubernetes-ci-cd-tutorial
 
 1. [Install istio](Istio.md)
 
+2. [Install Argoworkflow](Argoworkflow.md)
+
 ## Running CI/CD examples
 
 1. [simple web application for golang](Go.md)

@@ -2,9 +2,9 @@ INGRESS_NODE_IP ?= $(shell printenv INGRESS_NODE_IP)
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-BUILD_CMD = $(shell find . -name "*-vs.yaml" -exec sed -i "s@{ .INGRESS_NODE_IP }@${INGRESS_NODE_IP}@g" {} +)
+BUILD_CMD = $(shell find . -type f -exec sed -i "s@{.INGRESS_NODE_IP}@${INGRESS_NODE_IP}@g" {} +)
 else ifeq ($(UNAME_S),Darwin)
-BUILD_CMD = $(shell find . -name "*-vs.yaml" -exec sed -i '' "s@{ .INGRESS_NODE_IP }@${INGRESS_NODE_IP}@g" {} +)
+BUILD_CMD = $(shell find . -type f -exec sed -i '' "s@{.INGRESS_NODE_IP}@${INGRESS_NODE_IP}@g" {} +)
 endif
 
 build:

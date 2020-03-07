@@ -1,0 +1,26 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gitea
+spec:
+  hosts:
+  - "gitea.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - ingressgateway.istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        regex: /.*
+    route:
+    - destination:
+        host: gitea
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: gitea
+spec:
+  host: gitea-web
