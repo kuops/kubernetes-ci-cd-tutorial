@@ -18,7 +18,7 @@ kubectl create ns gitea
 kubectl apply -n gitea -f gitea/gitea.yaml
 ```
 
-Create Gitea virtualservice, access from `http://argo.{.INGRESS_NODE_IP}.nip.io`
+Create Gitea virtualservice, access from `http://gitea.{.INGRESS_NODE_IP}.nip.io`
 
 ```bash
 # export ingressgateway node ip
@@ -28,3 +28,9 @@ make build
 # apply gitea virtualservice
 kubectl apply -n gitea  -f gitea/gitea-vs.yaml
 ```
+
+Using Browser access giteal service click `Register`, Initial settings:
+
+- Change the Gitea Base URL to `http://gitea.{.INGRESS_NODE_IP}.nip.io`
+
+- Change `Administrator Account` Settings register your account
