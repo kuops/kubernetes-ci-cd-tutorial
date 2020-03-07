@@ -7,21 +7,25 @@ metadata:
     app: gitea
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
   template:
     metadata:
       name: gitea
       labels:
         app: gitea
     spec:
+      nodeName: GITEA_NODE_NAME
       containers:
       - name: gitea
         image: gitea/gitea:latest
         imagePullPolicy: Always
         volumeMounts:
           - mountPath: "/var/lib/gitea"
-            name: "root"
+            name: root-dir
           - mountPath: "/data"
-            name: "data"
+            name: data-dir
         ports:
           - containerPort: 22
             name: ssh
@@ -31,25 +35,19 @@ spec:
             protocol: TCP
       restartPolicy: Always
       volumes:
-      - name: "root"
+      - name: root-dir
         hostPath:
-          # directory location on host
-          path: "/var/lib/gitea"
-          # this field is optional
+          path: /var/lib/gitea
           type: Directory
-      - name: "data"
+      - name: data-dir
         hostPath:
-          path: "/data/gitea"
+          path: /data/gitea
           type: Directory
-  selector:
-    matchLabels:
-      app: gitea
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: gitea-web
-  namespace: gitea
   labels:
     app: gitea-web
 spec:
