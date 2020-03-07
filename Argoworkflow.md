@@ -17,5 +17,10 @@ kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/v2.6.1/
 Create Argoflow UI virtualservice, access Argo UI from `http://argo.{.INGRESS_NODE_IP}.nip.io`
 
 ```bash
+# export ingressgateway node ip
+export INGRESS_NODE_IP=$(kubectl get nodes ${NODE_NAME} -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
+# replace the {.INGRESS_NODE_IP} to ingressgateway node ip
+make build
+# apply argo virtualservice
 kubectl apply -n argo  -f argo/argo-workflow-vs.yaml
 ```
