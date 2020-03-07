@@ -26,5 +26,5 @@ export INGRESS_NODE_IP=$(kubectl get nodes ${NODE_NAME} -o jsonpath='{ .status.a
 # replace the {.INGRESS_NODE_IP} to ingressgateway node ip
 make build
 # apply gitea virtualservice
-kubectl apply -n argo  -f gitea/gitea-vs.yaml
+kubectl apply -n gitea  -f gitea/gitea-vs.yaml
 ```

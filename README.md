@@ -24,6 +24,8 @@ cd kubernetes-ci-cd-tutorial
 
 2. [Install Argoworkflow](Argoworkflow.md)
 
+3. [Install Gitea](Gitea.md)
+
 ## Running CI/CD examples
 
 1. [simple web application for golang](Go.md)
