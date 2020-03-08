@@ -1,5 +1,6 @@
 # Install Argoworkflow
 
+<!-- markdownlint-disable MD013 -->
 Install argo cli
 
 > argo command need kubectl config

@@ -1,5 +1,6 @@
 # Install ArgoCD
 
+<!-- markdownlint-disable MD013 -->
 Install ArgoCD
 
 ```bash

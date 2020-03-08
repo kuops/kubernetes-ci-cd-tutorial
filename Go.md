@@ -1,5 +1,6 @@
 # Deploy GoLang Application with Argo
 
+<!-- markdownlint-disable MD013 -->
 Deploy GoLang example App on Kubernetes and CI/CD tools using Argoworkflow and ArgoCD
 
 ## Quick Start

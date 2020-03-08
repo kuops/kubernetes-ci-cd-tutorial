@@ -1,5 +1,6 @@
 # Install Gitea
 
+<!-- markdownlint-disable MD013 -->
 Create data directory on gitea node
 
 ```bash

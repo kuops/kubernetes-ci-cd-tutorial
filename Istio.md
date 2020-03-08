@@ -1,5 +1,6 @@
 # Install istio
 
+<!-- markdownlint-disable MD013 -->
 Install the offical recommend components
 
 ```bash
