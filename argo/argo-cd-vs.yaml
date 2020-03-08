@@ -1,0 +1,48 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: argocd-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "argocd.{.INGRESS_NODE_IP}.nip.io"
+    tls:
+      mode: PASSTHROUGH
+      #mode: SIMPLE
+      #serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      #privateKey: /etc/istio/ingressgateway-certs/tls.key
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: argo-cd
+spec:
+  hosts:
+  - "argocd.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - argocd-gateway
+  tls:
+  - match:
+    - port: 443
+      sni_hosts:
+      - "argocd.{.INGRESS_NODE_IP}.nip.io"
+    route:
+    - destination:
+        host: argocd-server
+        port:
+          number: 443
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: argo-cd
+spec:
+  host: argocd-server

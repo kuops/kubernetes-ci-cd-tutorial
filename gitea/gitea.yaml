@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea
+  labels:
+    app: gitea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      name: gitea
+      labels:
+        app: gitea
+    spec:
+      nodeName: GITEA_NODE_NAME
+      containers:
+      - name: gitea
+        image: gitea/gitea:1.11.2
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: "/var/lib/gitea"
+            name: root-dir
+          - mountPath: "/data"
+            name: data-dir
+        ports:
+          - containerPort: 22
+            name: ssh
+            protocol: TCP
+          - containerPort: 3000
+            name: http
+            protocol: TCP
+      restartPolicy: Always
+      volumes:
+      - name: root-dir
+        hostPath:
+          path: /var/lib/gitea
+          type: Directory
+      - name: data-dir
+        hostPath:
+          path: /data/gitea
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-web
+  labels:
+    app: gitea-web
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    name: http
+  selector:
+    app: gitea
