@@ -1,4 +1,4 @@
-### Install Argoworkflow
+# Install Argoworkflow
 
 Install argo cli
 

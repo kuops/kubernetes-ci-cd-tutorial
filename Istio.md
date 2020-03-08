@@ -1,4 +1,4 @@
-### Install istio
+# Install istio
 
 Install the offical recommend components
 

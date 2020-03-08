@@ -1,4 +1,4 @@
-### Install ArgoCD
+# Install ArgoCD
 
 Install ArgoCD
 
@@ -20,14 +20,14 @@ kubectl apply -n argocd  -f argo/argo-cd-vs.yaml
 
 Install ArgoCD Cli
 
-```
+```bash
 curl -SL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.4.2/argocd-linux-amd64
 chmod +x /usr/local/bin/argocd
 ```
 
 Login Argocd,
 
-```
+```bash
 PASSWORD=$(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name|grep -Po '/\K[\w-]+')
 argocd  login argocd.10.7.0.102.nip.io:443 --username admin --password $PASSWORD
 ```

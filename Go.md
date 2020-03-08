@@ -45,13 +45,13 @@ kubectl create ns prod
 
 Create Deploy
 
-```
+```bash
 argocd app create go-example-app --repo https://github.com/kuops/go-example-app.git --path deploy/dev --dest-server https://kubernetes.default.svc --dest-namespace dev
 ```
 
 Test, Change ip to your pod ip test secret
 
-```
+```bash
 curl --header "Content-Type: application/json"   --request POST   --data '{"name":"xyz"}'   http://192.168.102.76:8080/api/hello
 ```
 
