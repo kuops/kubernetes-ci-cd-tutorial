@@ -23,7 +23,7 @@ Using `hostPort` expose istio-ingressgateway
 kubectl apply -f istio/istio-ingressgateway.yaml
 ```
 
-Chagne All virtualservice
+Build All virtualservice
 
 ```bash
 # export ingressgateway node ip

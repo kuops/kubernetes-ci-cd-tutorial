@@ -19,7 +19,7 @@ spec:
       nodeName: GITEA_NODE_NAME
       containers:
       - name: gitea
-        image: gitea/gitea:latest
+        image: gitea/gitea:1.11.2
         imagePullPolicy: Always
         volumeMounts:
           - mountPath: "/var/lib/gitea"

@@ -2,6 +2,8 @@
 
 Install argo cli
 
+> argo command need kubectl config
+
 ```bash
 curl -Lo /usr/local/bin/argo https://github.com/argoproj/argo/releases/download/v2.6.1/argo-linux-amd64
 chmod +x /usr/local/bin/argo

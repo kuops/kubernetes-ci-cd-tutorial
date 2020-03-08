@@ -28,4 +28,4 @@ cd kubernetes-ci-cd-tutorial
 
 ## Running CI/CD examples
 
-1. [simple web application for golang](Go.md)
+1. [simple web application for golang wich argoworkflow and argocd](Go.md)
