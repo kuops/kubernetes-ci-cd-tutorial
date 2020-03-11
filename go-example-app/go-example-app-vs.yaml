@@ -1,0 +1,81 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: go-example-app
+  namespace: dev
+spec:
+  hosts:
+  - "go.app.dev.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - ingressgateway.istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        regex: /.*
+    route:
+    - destination:
+        host: dev-go-example-app
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dev-go-example-app
+spec:
+  host: dev-go-example-app
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: go-example-app
+  namespace: stage
+spec:
+  hosts:
+  - "go.app.stage.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - ingressgateway.istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        regex: /.*
+    route:
+    - destination:
+        host: stage-go-example-app
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: stage-go-example-app
+spec:
+  host: stage-go-example-app
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: go-example-app
+  namespace: prod
+spec:
+  hosts:
+  - "go.app.prod.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - ingressgateway.istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        regex: /.*
+    route:
+    - destination:
+        host: prod-go-example-app
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: prod-go-example-app
+spec:
+  host: prod-go-example-app

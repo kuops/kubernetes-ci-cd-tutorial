@@ -50,6 +50,12 @@ Create Deploy
 argocd app create go-example-app --repo https://github.com/kuops/go-example-app.git --path deploy/dev --dest-server https://kubernetes.default.svc --dest-namespace dev
 ```
 
+Create VirtualService
+
+```
+kubectl apply -f go-example-app/go-example-app/go-example-app-vs.yaml
+```
+
 Test, Change ip to your pod ip test secret
 
 ```bash
