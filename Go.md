@@ -18,15 +18,25 @@ kubectl create -n argo secret docker-registry regcred \
 
 ### Start CI Pipelines
 
-submit workflow
+Clone code
 
 ```bash
 # clone example code
-git clone https://github.com/kuops/go-example-app
+git clone https://github.com/kuops/go-example-app ~/go-example-app/
+```
+
+Change workflow.yaml string
+
+```bash
 # replace docker image repo to your dockerhub repo/image:tag
-sed 's@--destination=kuops/go-example-app@@g'  go-example-app/.argoworkflow.yaml
+sed -i 's@--destination=kuops/go-example-app@<your docker hub repo>@g'  ~/go-example-app/.argoworkflow.yaml
+```
+
+submit workflow
+
+```bash
 # running ci steps with argowrokflow,you can use -p revision=<commit> options change the default master value
-argo submit -n argo --watch go-example-app/.argoworkflow.yaml
+argo submit -n argo --watch ~/go-example-app/.argoworkflow.yaml
 ```
 
 Browser the workflow pipelines on `http://argo.{.INGRESS_NODE_IP}.nip.io`
@@ -50,18 +60,14 @@ Create Deploy
 argocd app create go-example-app --repo https://github.com/kuops/go-example-app.git --path deploy/dev --dest-server https://kubernetes.default.svc --dest-namespace dev
 ```
 
+You Can use browser access `argocd.{.INGRESS_NODE_IP}.nip.io` check deploy status:
+
+![Argocd](images/Argocd.png)
+
 Create VirtualService
 
 ```
 kubectl apply -f go-example-app/go-example-app/go-example-app-vs.yaml
 ```
 
-Test, Change ip to your pod ip test secret
-
-```bash
-curl --header "Content-Type: application/json"   --request POST   --data '{"name":"xyz"}'   http://192.168.102.76:8080/api/hello
-```
-
-result use browser access:
-
-![Argocd](images/Argocd.png)
+Finally your can use browser access `go.app.prod.{.INGRESS_NODE_IP}.nip.io`

@@ -12,9 +12,9 @@ Change default ingressgateway deployment to ingressgateway node
 
 ```bash
 # change node name to your ingressgateway node
-export INGRESS_NODE_NAME="kube-node1"
+export INGRESS_NODE_NAME=<you node name>
 # add ingressgateway label with the node
-kubectl label node $NODE_NAME node-role.kubernetes.io/ingressgateway=ingressgateway
+kubectl label node ${INGRESS_NODE_NAME} node-role.kubernetes.io/ingressgateway=ingressgateway
 ```
 
 Using `hostPort` expose istio-ingressgateway
