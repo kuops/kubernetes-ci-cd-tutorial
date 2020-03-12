@@ -77,4 +77,13 @@ Create VirtualService
 kubectl apply -f go-example-app/go-example-app/go-example-app-vs.yaml
 ```
 
-Finally your can use browser access `go.app.prod.{.INGRESS_NODE_IP}.nip.io`
+Finally your can use browser access the user account is `admin@example.com` password `admin`:
+
+- `go.app.dev.{.INGRESS_NODE_IP}.nip.io`
+- `go.app.stage.{.INGRESS_NODE_IP}.nip.io`
+- `go.app.prod.{.INGRESS_NODE_IP}.nip.io`
+
+
+You can login index page show environment:
+
+![go-example-app](images/go-example-app.png)
