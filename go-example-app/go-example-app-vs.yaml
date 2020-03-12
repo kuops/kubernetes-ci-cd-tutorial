@@ -23,6 +23,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: dev-go-example-app
+  namespace: dev
 spec:
   host: dev-go-example-app
 ---
@@ -50,6 +51,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: stage-go-example-app
+  namespace: stage
 spec:
   host: stage-go-example-app
 ---
@@ -77,5 +79,6 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: prod-go-example-app
+  namespace: prod
 spec:
   host: prod-go-example-app
