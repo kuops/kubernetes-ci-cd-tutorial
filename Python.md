@@ -49,7 +49,6 @@ grafana dashboard
 python-example-app/grafana/dashboard.json
 ```
 
-
 ## 示例 dashboard 指标
 
 ### 每秒请求数
@@ -76,7 +75,7 @@ sum(
 
 ### 每分钟的总请求数
 
-每隔一分钟测量的请求总数。按HTTP响应状态代码显示。
+每隔一分钟测量的请求总数。按 HTTP 响应状态代码显示。
 
 ```
 increase(
@@ -86,7 +85,7 @@ increase(
 
 ### 30 秒内平均响应时间
 
-成功请求的间隔为30秒的平均响应时间。每条路径显示。
+成功请求的间隔为 30 秒的平均响应时间。每条路径显示。
 
 ```
 rate(
@@ -100,7 +99,7 @@ rate(
 
 ### 响应低于 250 ms 的请求
 
-成功请求的百分比在1/4秒内完成。每条路径显示。
+成功请求的百分比在 1/4 秒内完成。每条路径显示。
 
 ```
 increase(
@@ -112,10 +111,9 @@ increase(
 )
 ```
 
-
 ### 请求持续时间[s] - p50
 
-在过去30秒内请求持续时间的第50个百分位数。换句话说，这些时间中，有一半的请求以（min / max / avg）结束。每条路径显示。
+在过去 30 秒内请求持续时间的第 50 个百分位数。换句话说，这些时间中，有一半的请求以（min / max / avg）结束。每条路径显示。
 
 ```
 histogram_quantile(
@@ -129,7 +127,6 @@ histogram_quantile(
 ### 请求持续时间[s] - p90
 
 The 90th percentile of request durations over the last 30 seconds. In other words, 90 percent of the requests finish in (min/max/avg) these times. Shown per path.
-
 
 ```
 histogram_quantile(

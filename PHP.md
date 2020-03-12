@@ -1,4 +1,4 @@
-php code repo 开发者使用，在仓库的 ci 文件夹存放 用于 CI 的 Jenkinsfile ,示例地址: 
+php code repo 开发者使用，在仓库的 ci 文件夹存放 用于 CI 的 Jenkinsfile ,示例地址:
 
 ```
 https://github.com/kuops/php-example-app.git
@@ -25,7 +25,7 @@ https://github.com/kuops/php-infrastructure.git
 修改 pipeline 中的 REGISTRY_URL 为你的地址:
 
 ```
-environment { 
+environment {
         REGISTRY_URL = 'docker.k8s.yourdomain.com'
     }
 ```
@@ -42,8 +42,7 @@ kubectl apply -f https://raw.githubusercontent.com/kuops/php-infrastructure/mast
 
 配置完成之后点击构建，就开始执行 CI 操作了。
 
-
-### php cd 
+### php cd
 
 部署之前我们还需要一个 https 证书，在 php-infrastructure 中将 https 证书修改 voyager/template/secret.yaml
 
