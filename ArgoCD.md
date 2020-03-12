@@ -30,5 +30,5 @@ Login Argocd,
 
 ```bash
 export ARGOCD_PASSWORD=$(kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name|grep -Po '/\K[\w-]+')
-argocd  login argocd.10.7.0.102.nip.io:443 --username admin --password $ARGO_PASSWORD
+argocd  login argocd.10.7.0.102.nip.io:443 --username admin --password $ARGOCD_PASSWORD
 ```

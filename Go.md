@@ -57,7 +57,14 @@ kubectl create ns prod
 Create Deploy
 
 ```bash
-argocd app create go-example-app --repo https://github.com/kuops/go-example-app.git --path deploy/dev --dest-server https://kubernetes.default.svc --dest-namespace dev
+argocd app create go-example-app --repo https://github.com/kuops/go-example-app.git --path deploy --dest-server https://kubernetes.default.svc --dest-namespace dev
+```
+
+Deploy the app
+
+```
+argocd app sync go-example-app --dry-run
+argocd app sync go-example-app 
 ```
 
 You Can use browser access `argocd.{.INGRESS_NODE_IP}.nip.io` check deploy status:
