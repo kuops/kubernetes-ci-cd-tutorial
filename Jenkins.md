@@ -26,3 +26,4 @@ kubectl apply -f jenkins/jenkins-vs.yaml
 
 Using Browser access `http://jenkins.{.INGRESS_NODE_IP}.nip.io`, Login with user `admin` and password `admin`:
 
+![jenkins login](images/Jenkins-login.png)

@@ -17,7 +17,7 @@ spec:
     - destination:
         host: example-jenkins
         port:
-          number: 80
+          number: 8080
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
