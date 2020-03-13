@@ -181,6 +181,8 @@ data:
     workflow-aggregator:2.6
     credentials-binding:1.21
     git:4.2.0
+    ansicolor:0.6.1
+    timestamper:1.11.2
 ---
 # Source: jenkins/templates/tests/test-config.yaml
 apiVersion: v1

@@ -8,6 +8,7 @@ select a node as jenkins node
 kubectl label nodes kube-node1 node-role.kubernetes.io/jenkins=jenkins
 # creat jenkins home on kube-node1
 mkdir -p /data/jenkins
+mkdir -p /data/composer-cache
 # apply app
 kubectl create ns jenkins
 kubectl apply -f jenkins/jenkins.yaml
