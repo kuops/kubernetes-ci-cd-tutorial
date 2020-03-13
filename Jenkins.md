@@ -9,6 +9,7 @@ kubectl label nodes kube-node1 node-role.kubernetes.io/jenkins=jenkins
 # creat jenkins home on kube-node1
 mkdir -p /data/jenkins
 # apply app
+kubectl create ns jenkins
 kubectl apply -f jenkins/jenkins.yaml
 ```
 

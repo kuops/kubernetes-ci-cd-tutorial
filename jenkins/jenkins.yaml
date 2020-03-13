@@ -352,6 +352,8 @@ spec:
           imagePullPolicy: "Always"
           command: [ "sh", "/var/jenkins_config/apply_config.sh" ]
           env:
+            - name: JENKINS_UC
+              velue: "https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/"
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
