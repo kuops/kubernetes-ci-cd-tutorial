@@ -34,10 +34,65 @@ Then retry it, the parameters is working, Chane parameter to your repos:
 
 ![jenkins paremeters2](images/php-example-app-ci-parameters2.png)
 
+Then build the `master` and `canary` branch and push image,finally have two image:
+
+![jenkins canary](images/php-example-app-ci-canary.png)
+
+- `kuops/php-example-app:master`
+- `kuops/php-example-app:canary`
+
 ### CD 
 
-Deploy temporary mysql ，not have volume
+Deploy temporary mysql,not have volume
 
 ```bash
 kubectl apply -f mysql/mysql.yaml
 ```
+
+Create Deploy Serviceaccount
+
+```bash
+kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=jenkins:example-jenkins
+```
+
+Create jenkins project `php-app-example-cd`
+
+Change virtualservice `{.INGRESS_NODE_IP}` to your ingress ip, Change weight to control canary deploy
+
+```bash
+    route:
+    - destination:
+        host: blue-voyager
+        port:
+          number: 80
+      weight: 100
+    - destination:
+        host: green-voyager
+        port:
+          number: 80
+      weight: 0
+```
+
+the blue version:
+
+![blue version](images/php-example-app-blue-version.png)
+
+Change Green version:
+
+```bash
+    route:
+    - destination:
+        host: blue-voyager
+        port:
+          number: 80
+      weight: 0
+    - destination:
+        host: green-voyager
+        port:
+          number: 80
+      weight: 100
+```
+
+the green version:
+
+![green version](images/php-example-app-green-version.png)

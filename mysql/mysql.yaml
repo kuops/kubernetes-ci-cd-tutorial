@@ -13,7 +13,7 @@ metadata:
 type: Opaque
 data:
   mysql-root-password:  "bXlzcWw="
-  mysql-password: "TWdaNk5acDllaA=="
+  mysql-password: "bXlzcWw="
 ---
 # Source: mysql/templates/svc.yaml
 apiVersion: v1
@@ -101,7 +101,7 @@ spec:
               key: mysql-password
               optional: true
         - name: MYSQL_USER
-          value: ""
+          value: "mysql"
         - name: MYSQL_DATABASE
           value: "laravel"
         ports:
@@ -129,3 +129,12 @@ spec:
           timeoutSeconds: 1
           successThreshold: 1
           failureThreshold: 3
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql-data
+          readOnly: false
+      volumes:
+      - name: mysql-data
+        hostPath:
+          path: /data/mysql
+          type: Directory

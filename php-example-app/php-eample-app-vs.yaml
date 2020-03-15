@@ -1,0 +1,39 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: php-example-app
+spec:
+  hosts:
+  - "php.app.{.INGRESS_NODE_IP}.nip.io"
+  gateways:
+  - ingressgateway.istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        regex: /.*
+    route:
+    - destination:
+        host: blue-voyager
+        port:
+          number: 80
+      weight: 100
+    - destination:
+        host: green-voyager
+        port:
+          number: 80
+      weight: 0
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: blue-voyager
+spec:
+  host: blue-voyager
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: green-voyager
+spec:
+  host: green-voyager
