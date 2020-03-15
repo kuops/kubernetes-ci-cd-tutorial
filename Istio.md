@@ -28,7 +28,7 @@ Build All virtualservice
 
 ```bash
 # export ingressgateway node ip
-export INGRESS_NODE_IP=$(kubectl get nodes ${NODE_NAME} -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
+export INGRESS_NODE_IP=$(kubectl get nodes ${INGRESS_NODE_NAME} -o jsonpath='{ .status.addresses[?(@.type=="InternalIP")].address }')
 # replace the {.INGRESS_NODE_IP} to ingressgateway node ip
 make build
 ```

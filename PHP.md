@@ -1,78 +1,98 @@
-php code repo 开发者使用，在仓库的 ci 文件夹存放 用于 CI 的 Jenkinsfile ,示例地址:
+# Deploy PHP Application with Jenkins
 
-```
-https://github.com/kuops/php-example-app.git
-```
+<!-- markdownlint-disable MD013 -->
+Deploy PHP example App on Kubernetes and CI/CD tools using Jenkins And Helm
 
-php deploy repo 运维人员使用, 仓库地址:
+## Quick Start
 
-```
-https://github.com/kuops/php-infrastructure.git
-```
+### Install Dependencies
 
-将这两个仓库 fork 到你自己的仓库下面
+1. [Install Jenkins](Jenkins.md)
 
-### php ci
 
-由于使用私有地址，无法使用 webhook 回调，不能使用 pull requirest 触发构建，这里使用 pollSCM 触发构建
+### CI
 
-```
- triggers {
-        pollSCM('*/2 * * * 1-5')
-    }
-```
+Create Docker Regisgtry secret.
 
-修改 pipeline 中的 REGISTRY_URL 为你的地址:
-
-```
-environment {
-        REGISTRY_URL = 'docker.k8s.yourdomain.com'
-    }
+```bash
+kubectl create -n jenkins secret docker-registry regcred \
+   --docker-server="https://index.docker.io/v1/"  \
+   --docker-username=<your-name> \
+   --docker-password=<your-pword>
 ```
 
-首先, 我们创建一个用于存放 composer cache 的 volume, 这个 volume 用于 Jenkins 的 slave 启动
+Using Jenkins CI build php app, The Jenkins Project Settings:
 
-```
-kubectl apply -f https://raw.githubusercontent.com/kuops/php-infrastructure/master/composer/pvc.yaml
-```
+![jenkins ci setttings](images/php-example-app-ci.png)
 
-接下来我们创建 CI job `php-ci`,类型为 Pipeline , 按照以下设置 Jenkins , Jenkinsfile 路径为 `ci/Jenkinsfile`
 
-![php-pipeline-ci](images/PHP-CI-Pipeline-Setting.png)
+But Fist Build Can Failed, Beacuse You Dont have Build Parameter:
 
-配置完成之后点击构建，就开始执行 CI 操作了。
+![jenkins parameters](images/php-example-app-ci-parameters.png)
 
-### php cd
+Then retry it, the parameters is working, Chane parameter to your repos:
 
-部署之前我们还需要一个 https 证书，在 php-infrastructure 中将 https 证书修改 voyager/template/secret.yaml
+![jenkins paremeters2](images/php-example-app-ci-parameters2.png)
 
-```
-apiVersion: v1
-data:
-  tls.crt: <your_cert>
-  tls.key: <key_key>
-kind: Secret
-metadata:
-  name: php-tls-certs
-type: kubernetes.io/tls
+Then build the `master` and `canary` branch and push image,finally have two image:
 
-```
+![jenkins canary](images/php-example-app-ci-canary.png)
 
-设置 dev 空间拉去镜像 secret
+- `kuops/php-example-app:master`
+- `kuops/php-example-app:canary`
 
+### CD 
+
+Deploy temporary mysql,not have volume
+
+```bash
+kubectl apply -f mysql/mysql.yaml
 ```
 
-kubectl -n dev create secret docker-registry regcred \
-    --docker-server=docker.k8s.yourdomain.com \
-    --docker-username=admin --docker-password=admin123
+Create Deploy Serviceaccount
+
+```bash
+kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=jenkins:example-jenkins
 ```
 
-设置 jenkins cd job `php-cd` pipeline 类型,设置如下：
+Create jenkins project `php-app-example-cd`
 
-![PHP-CD-Pipeline-Setting.png](images/PHP-CD-Pipeline-Setting.png)
+Change virtualservice `{.INGRESS_NODE_IP}` to your ingress ip, Change weight to control canary deploy
 
-构建完成之后访问 `https://php.k8s.yourdomain.com/admin`
+```bash
+    route:
+    - destination:
+        host: blue-voyager
+        port:
+          number: 80
+      weight: 100
+    - destination:
+        host: green-voyager
+        port:
+          number: 80
+      weight: 0
+```
 
-用户名: `admin@admin.com` , 密码: `password`
+the blue version:
 
-![php-example.png](images/php-example.png)
+![blue version](images/php-example-app-blue-version.png)
+
+Change Green version:
+
+```bash
+    route:
+    - destination:
+        host: blue-voyager
+        port:
+          number: 80
+      weight: 0
+    - destination:
+        host: green-voyager
+        port:
+          number: 80
+      weight: 100
+```
+
+the green version:
+
+![green version](images/php-example-app-green-version.png)
